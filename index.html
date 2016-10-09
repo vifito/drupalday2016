@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Scraping de contenidos e integración en Drupal 8</title>
+
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="assets/custom/favicon/apple-touch-icon-57x57.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/custom/favicon/apple-touch-icon-114x114.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/custom/favicon/apple-touch-icon-72x72.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/custom/favicon/apple-touch-icon-144x144.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="60x60" href="assets/custom/favicon/apple-touch-icon-60x60.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/custom/favicon/apple-touch-icon-120x120.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/custom/favicon/apple-touch-icon-76x76.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/custom/favicon/apple-touch-icon-152x152.png" />
+		<link rel="icon" type="image/png" href="assets/custom/favicon/favicon-196x196.png" sizes="196x196" />
+		<link rel="icon" type="image/png" href="assets/custom/favicon/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/png" href="assets/custom/favicon/favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="assets/custom/favicon/favicon-16x16.png" sizes="16x16" />
+		<link rel="icon" type="image/png" href="assets/custom/favicon/favicon-128.png" sizes="128x128" />
+		<meta name="msapplication-TileColor" content="#FFFFFF" />
+		<meta name="msapplication-TileImage" content="assets/custom/favicon/mstile-144x144.png" />
+		<meta name="msapplication-square70x70logo" content="assets/custom/favicon/mstile-70x70.png" />
+		<meta name="msapplication-square150x150logo" content="assets/custom/favicon/mstile-150x150.png" />
+		<meta name="msapplication-square310x310logo" content="assets/custom/favicon/mstile-310x310.png" />
+
+		<meta name="description" content="Scraping de contenidos e integración en Drupal 8">
+		<meta name="author" content="vifito">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="assets/reveal.js/css/reveal.css">
+		<!-- <link rel="stylesheet" href="assets/reveal.js/css/theme/black.css" id="theme"> -->
+		<link rel="stylesheet" href="assets/custom/css/usc.css" id="theme">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="assets/reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'assets/reveal.js/css/print/pdf.css' : 'assets/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="assets/reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<section>
+						<h1>Scraping de contenidos e integración en Drupal8</h1>
+						<p>
+							<em>Tomás Vilariño Fidalgo</em><br/>
+
+							<small>
+								Ingeniero Informático <small>(UVigo)</small><br/>
+								Técnico Especialista en Desarrollo Web <small>(UJI)</small><br/>
+							</small>
+						</p>
+
+						<p>
+								<a href="https://www.drupal.org/u/vifito"><i class="fa fa-drupal" aria-hidden="true"></i> vifito</a>
+								&nbsp;&nbsp;
+								<a href="https://twitter.com/vifito"><i class="fa fa-twitter" aria-hidden="true"></i>@vifito</a>
+						</p>
+					</section>
+
+					<section data-background="assets/custom/images/oficina-web.jpg">
+						<h2>Trabajo en</h2>
+						<h3><i class="fa fa-home" aria-hidden="true"></i> Oficina Web de la <abbr title="Universidad de Santiago de Compostela">USC</abbr></h3>
+						<p>
+							actualmente en la migración de la web <a href="http://www.usc.es">www.usc.es</a> a Drupal 8.
+						</p>
+					</section>
+				</section>
+
+
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li>Situación actual</li>
+						<li>Instalación de las herramientas necesarias</li>
+						<li>Tipos de crawlers</li>
+						<li>Extracción de contenidos</li>
+						<li>Limpieza de código HTML, tratamiento imágenes y ficheros</li>
+						<li>Integración en Drupal</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Situación actual</h2>
+					<p class="fragment grow">Migración web USC.es</p>
+					<p class="fragment grow">Sitio con miles de páginas</p>
+					<p class="fragment grow">Nos centramos en exportar páginas "estáticas"</p>
+					<p class="fragment grow">Compleja exportación datos</p>
+					<p class="fragment grow">Mantener misma estructura navegación (SEO)</p>
+				</section>
+
+				<section>
+					<h2>Primera idea</h2>
+					<p>Utilizar soluciones de exportación del CMS actual, o acceso directo a base de datos</p>
+					<p>
+						<strong class="fragment fade-in">Problemas</strong>
+						<ul>
+							<li class="fragment fade-in">Acceso a base de datos implica cambios en sistemas</li>
+							<li class="fragment fade-in">Desconocimiento estructura base de datos, elevada curva de aprendizaje</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Segunda idea</h2>
+					<p>Acceder directamente a través de la web y extraer los contenidos.</p>
+				</section>
+
+				<section>
+					<h2>Prueba de concepto I</h2>
+					<p>
+						Utilizar <strong>Goutte</strong> para recuperar y extraer contenidos.<br/>Insertar en Drupal a través de un comando <strong>Drush</strong> usando Entity API.<br/> Todo implementado en <strong>PHP</strong> con componentes alternativos <strong>Guzzle</strong> y <strong>DOMCrawler</strong>.
+					</p>
+					<p>
+						<img src="assets/custom/images/php.png" alt="" border="0" />
+					</p>
+				</section>
+
+				<section>
+					<h2>Prueba de concepto I</h2>
+					<p>
+						La idea funciona para una páxina pero presenta inconveniente cuando
+					</p>
+				</section>
+
+				<section>
+					<h2>Prueba de concepto II</h2>
+					<p>
+						Recuperamos contenidos con framework Scrapy y
+					</p>
+					<p>
+						<img src="assets/custom/images/scrapy.png" alt="" border="0" />
+					</p>
+				</section>
+
+				<section>
+					<h2>Instalación framework scraping (Scrapy)</h2>
+					<pre><code class="hljs bash" data-trim contenteditable>
+sudo apt-get install python-dev python-pip libxml2-dev \
+  libxslt1-dev zlib1g-dev libffi-dev libssl-dev
+sudo pip install scrapy
+				</code></pre>
+					<p></p>
+				</section>
+
+				<section data-background-video="./assets/custom/scrapy-shell.webm" data-background-color="#FFFFFF">
+					<h2 class="heading-inverse">scrapy shell http://...</h2>
+				</section>
+
+				<section>
+					<h2>Pipelines</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+import pymongo
+# import ...
+class PaxinasPipeline(object):
+  def __init__(self):
+    connection = pymongo.MongoClient(
+      settings['MONGODB_SERVER'],
+      settings['MONGODB_PORT']
+    )
+    db = connection[settings['MONGODB_DB']]
+    self.collection = db[settings['MONGODB_COLLECTION']]
+
+  def process_item(self, item, spider):
+    for data in item:
+      if not data:
+        raise DropItem("Missing data!")
+    self.collection.update({'url': item['url']}, dict(item), upsert=True)
+    return item
+</code></pre>
+					<p></p>
+				</section>
+
+
+
+
+
+
+				<section style="text-align: left;">
+					<h1>FIN</h1>
+					<p>
+						<a href="http://www.usc.es">Visítanos en breve</a> <br/>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="assets/reveal.js/lib/js/head.min.js"></script>
+		<script src="assets/reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: 'c/t',
+
+				transition: 'concave', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'assets/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'assets/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'assets/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'assets/reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'assets/reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
