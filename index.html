@@ -107,9 +107,9 @@
 					<h2>Situación actual</h2>
 					<p class="fragment grow">Migración web USC.es</p>
 					<p class="fragment grow">Sitio con miles de páginas</p>
-					<p class="fragment grow">Nos centramos en exportar páginas "estáticas"</p>
 					<p class="fragment grow">Compleja exportación datos</p>
 					<p class="fragment grow">Mantener misma estructura navegación (SEO)</p>
+					<p class="fragment fade-in">En esta charla nos centramos en exportar páginas "estáticas"</p>
 				</section>
 
 				<section>
@@ -140,16 +140,39 @@
 				</section>
 
 				<section>
-					<h2>Prueba de concepto I</h2>
+					<h2>Prueba de concepto I (inconvenientes)</h2>
 					<p>
-						La idea funciona para una páxina pero presenta inconveniente cuando
+						<strong class="fragment fade-in">Programación manual de:</strong>
+						<ul>
+							<li class="fragment fade-in">Gestión cola de enlaces pendientes</li>
+							<li class="fragment fade-in">Gestión de enlaces duplicados</li>
+							<li class="fragment fade-in">Almacenamiento de los contenidos extraídos</li>
+							<li class="fragment fade-in">Procesamiento multihilo</li>
+							<li class="fragment fade-in">Descarga de documentos (PDF, DOC, ...) y tratamiento de imágenes</li>
+							<li class="fragment fade-in">Parada y reanudación del proceso</li>
+						</ul>
+					</p>
+				</section>
+
+
+				<section>
+					<h2>Prueba de concepto II</h2>
+					<p>
+						Necesitamos algo más que un API de scraping de páginas.
+
+						<ul>
+							<li class="fragment fade-in">Scraping, extracción de contenidos</li>
+							<li class="fragment fade-in">Crawling, bot para seguir la navegación</li>
+							<li class="fragment fade-in">Storing, almacenar los contenidos</li>
+							<li class="fragment fade-in">Plumbing, otras tareas de «fontanería»</li>
+						</ul>
 					</p>
 				</section>
 
 				<section>
 					<h2>Prueba de concepto II</h2>
 					<p>
-						Recuperamos contenidos con framework Scrapy y
+						Encontramos framework para programar "arañas"
 					</p>
 					<p>
 						<img src="assets/custom/images/scrapy.png" alt="" border="0" />
@@ -200,10 +223,12 @@ class PaxinasPipeline(object):
 
 
 				<section style="text-align: left;">
-					<h1>FIN</h1>
+					<h1>Preguntas</h1>
 					<p>
-						<a href="http://www.usc.es">Visítanos en breve</a> <br/>
+						<a href="http://www.usc.es">www.usc.es</a> ... en breve powered by Drupal 8<br/>
 					</p>
+					<br/>
+					<p style="text-align:right">Gracias</p>
 				</section>
 
 			</div>
