@@ -297,3 +297,13 @@ body {
 
 .reveal pre {
   width: 95%; }
+
+.reveal section img[data-unbordered] {
+  border-width: 0px;
+  box-shadow: none;
+}
+
+.reveal .text-center {
+  margin: 0 auto;
+  text-align: center;
+}
