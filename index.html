@@ -91,7 +91,7 @@
         </section>
 
 
-        <section>
+        <!--<section>
           <h2>Agenda</h2>
           <ul>
             <li>Situación actual</li>
@@ -101,7 +101,7 @@
             <li>Limpieza de código HTML, tratamiento imágenes y ficheros</li>
             <li>Integración en Drupal</li>
           </ul>
-        </section>
+        </section>-->
 
         <section>
           <h2>Situación actual</h2>
@@ -368,6 +368,35 @@ rules = (
           <p>Definimos clase <code>PaxinasItem</code> con los campos que vamos a recuperar.</p>
 
           <img src="assets/custom/images/map.png" data-unbordered="true" alt="" />
+        </section>
+
+        <section>
+          <h2>Selectores</h2>
+
+          <table>
+            <thead>
+            <tr>
+              <th>CSS (response.css)</th>
+              <th>XPath (response.xpath)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>title::text</td>
+              <td>//title/text()</td>
+            </tr>
+            <tr>
+              <td>base::attr(href)</td>
+              <td>//base/@href</td>
+            </tr>
+            <tr>
+              <td>a[href*=image]::attr(href)</td>
+              <td>//a[contains(@href, "image")]/@href</td>
+            </tr>
+            </tbody>
+          </table>
+          
+          <p>También con expresiones regulares <code>response.re()</code>.(*) Portia, proyecto que permite extraer de forma visual.</p>
         </section>
 
         <section data-background-video="./assets/custom/scrapy-shell.webm" data-background-color="#FFFFFF">
@@ -652,7 +681,49 @@ MONGODB_COLLECTION = "paxinas"
 </code></pre>
         </section>
 
+        <section>
+          <h2>BONUS: Try yourself</h2>
 
+          <p>
+            <img src="assets/custom/images/Octocat.jpg" data-unbordered="true" alt="" width="100" />
+          </p>
+
+          <p class="fragment fade-in">
+            Esta presentación está disponible en: <a href="https://vifito.github.io/drupalday2016/">vifito.github.io/drupalday2016/</a>
+          </p>
+
+          <p class="fragment fade-in">
+            También el repositorio con: <a href="https://github.com/vifito/drupalday2016">github.com/vifito/drupalday2016</a>
+          </p>
+
+          <pre class="fragment fade-in"><code data-trim contenteditable>
+github.com/vifito/drupalday2016
+└── demo
+    ├── module
+    │   └── drupalday
+    └── scrapy
+        └── drupalday
+
+            </code></pre>
+        </section>
+
+        <section>
+          <h2>BONUS: Try yourself (demo)</h2>
+
+          <p>
+            La demo incluye <strong>una araña con Scrapy</strong> que recupera los artículos de Drupal 8 de Sitepoint (https://www.sitepoint.com/tag/drupal-8/). Y un <strong>módulo de Drupal</strong> para insertar los artículos.
+          </p>
+
+          <p>En el directorio <code>scrapy</code> ejecutar <code>launch.sh</code> o:</p>
+          <pre><code class="hljs bash" data-trim contenteditable>
+scrapy crawl sitepoint -o drupal.json --logfile=drupal.log
+            </code></pre>
+
+          <p>Copiar el fichero <code>drupal.json</code> y el directorio <code>assets</code> a la raiz de una instalación drupal y ejecutar::</p>
+          <pre><code class="hljs bash" data-trim contenteditable>
+drush ddi drupal.json --assets=./assets
+            </code></pre>
+        </section>
 
 
         <section style="text-align: left;">
